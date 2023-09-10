@@ -1,42 +1,42 @@
 package ui_stepdefinitions;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import utilities.Keywords;
-import utilities.PageManager;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.*;
 
 public class LoginSteps {
 
-	private PageManager pages = PageManager.getInstance();
+	private WebDriver driver;
 
 	@Given("user is on the boratech homepage")
 	public void user_is_on_the_boratech_homepage() {
-		pages.homePage().navigate();
-		pages.homePage().validatePageload();
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://boratech-practice-app.onrender.com/");
+
 	}
 
-	@And("user navigates to the Login page")
+	@When("user navigates to the Login page")
 	public void user_navigates_to_the_login_page() {
-		pages.navbar().navigateToLoginPage();
-		pages.loginPage().validatePageload();
+		driver.findElement(By.linkText("Login")).click();
 	}
 
 	@When("user enters the username - {string} and password - {string} and submit")
-	public void user_enters_the_username_and_password_and_submit(String username, String password)
-			throws InterruptedException {
-		pages.loginPage().login(username, password);
-		Keywords.wait(2);
+	public void user_enters_the_username_and_password_and_submit(String username, String password) {
+		driver.findElement(By.name("email")).sendKeys(username);
+		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.xpath("//input[@type = 'submit']")).click();
 	}
 
 	@Then("user should be on the Dashboard page")
 	public void user_should_be_on_the_dashboard_page() {
-		pages.dashboardPage().validatePageload();
+		String titleText = driver.findElement(By.xpath("//h1[text()='Dashboard']")).getText();
+		System.out.println(titleText);
 	}
 
-	@Then("user should see a login error")
-	public void user_should_see_a_login_error() {
-		pages.loginPage().validateErrorState();
-	}
 }
