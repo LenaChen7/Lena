@@ -1,7 +1,6 @@
 package utilities;
 
 import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -19,6 +18,15 @@ public class DriverManager {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		}
 		return driver;
+	}
+
+	public static void teardown() {
+		if (driver != null) {
+			driver.close();
+			driver.quit();
+		}
+		driver = null;
+
 	}
 
 }

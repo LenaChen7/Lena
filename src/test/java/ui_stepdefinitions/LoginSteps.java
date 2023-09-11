@@ -2,10 +2,11 @@ package ui_stepdefinitions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.cucumber.java.en.*;
+import utilities.DriverManager;
 
 public class LoginSteps {
 
-	private WebDriver driver;
+	private WebDriver driver = DriverManager.getInstance();
 
 	@Given("user is on the boratech homepage")
 	public void user_is_on_the_boratech_homepage() {
