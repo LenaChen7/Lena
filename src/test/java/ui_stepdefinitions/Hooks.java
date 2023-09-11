@@ -1,25 +1,19 @@
 package ui_stepdefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import utilities.DataManager;
+import io.cucumber.java.*;
 import utilities.DriverManager;
-import utilities.PageManager;
 
 public class Hooks {
 
-	@Before("@UI or @ui")
+	@Before
 	public void setup() {
 		DriverManager.getInstance();
-		DataManager.getInstance();
-		PageManager.getInstance();
+
 	}
 
-	@After("@UI or @ui")
+	@After
 	public void cleanup() {
 		DriverManager.teardown();
-		DataManager.cleanup();
-		PageManager.cleanup();
 	}
 
 }

@@ -1,7 +1,7 @@
+@Nike
 Feature: Nike
 
-  @UI @Nike_Search
   Scenario: Product Search
-    Given user is on the nike homepage
-    When user searches for "Air Jordan"
+    Given user is on the Nike homepage
+    And user searches for "Air Jordan"
     Then user should see search results for "Air Jordan"
