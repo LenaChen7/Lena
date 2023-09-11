@@ -1,11 +1,6 @@
 package ui_stepdefinitions;
-
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import io.cucumber.java.en.*;
 
 public class LoginSteps {
@@ -14,9 +9,6 @@ public class LoginSteps {
 
 	@Given("user is on the boratech homepage")
 	public void user_is_on_the_boratech_homepage() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.get("https://boratech-practice-app.onrender.com/");
 
 	}
