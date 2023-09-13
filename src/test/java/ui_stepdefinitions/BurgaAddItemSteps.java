@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import io.cucumber.java.en.*;
 import utilities.DriverManager;
 
-public class BurgaSteps {
+public class BurgaAddItemSteps {
 
 	private WebDriver driver = DriverManager.getInstance();
 
@@ -30,9 +30,9 @@ public class BurgaSteps {
 
 	}
 
-	@Given("user adds one item - {string} into the shopping cart")
+	@Given("user adds one item {string} into the shopping cart")
 	public void user_adds_one_item_into_the_shopping_cart(String item) {
-		driver.findElement(By.xpath("//li [@data-product-id='7232213811373']"));
+		driver.findElement(By.xpath("//h1[text() = 'Phone Cases']"));
 		driver.findElement(By.xpath("(//button[@aria-label='Add to cart'])[1]")).click();
 		String expectedText = driver
 				.findElement(By.xpath("//div[@class='cart-item__content cell-l']//h3[text()='Almond Latte ']"))
