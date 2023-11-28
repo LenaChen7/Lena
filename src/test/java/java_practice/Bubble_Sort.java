@@ -9,7 +9,7 @@ public class Bubble_Sort {
 		System.out.println("Orginal: " + Arrays.toString(numbers));
 
 		int[] result = bubbleSort(numbers);
-		System.out.println("Ordered: " + Arrays.toString(numbers));
+		System.out.println("Ordered: " + Arrays.toString(result));
 
 	}
 
