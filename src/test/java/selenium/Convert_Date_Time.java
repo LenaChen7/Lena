@@ -3,7 +3,7 @@ package selenium;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Ramdom {
+public class Convert_Date_Time {
 
 	public static void main(String[] args) {
 		String expectedDob = "07/29/2022";
