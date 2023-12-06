@@ -40,6 +40,12 @@ public class Keywords {
 		LocalDate date = LocalDate.parse(expectedDate, formatter);
 		return date.toString();
 
+		// It creates a date and time formatter for the pattern "MM/dd/yyyy".
+		// It parses the string expectedDob (which represents a date) xinto a LocalDate
+		// object using the specified formatter.
+		// It prints the string representation of the LocalDate object (date) to the
+		// console. In this case, it will print "2022-07-29".
+
 	}
 
 }
