@@ -1,10 +1,14 @@
 package selenium;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Wait;
 
 public class Add_Experience {
 
@@ -17,7 +21,7 @@ public class Add_Experience {
 		String uRl = "https://boratech-practice-app.onrender.com/login#!";
 		// Data
 		String jobTitle = "teacher";
-		String company = "RSM";
+		String company = "RSM" + getTimestamp();
 		String location = "Ashburn";
 		String from = "03/10/2023";
 		String to = "07/21/2023";
@@ -46,11 +50,38 @@ public class Add_Experience {
 			driver.findElement(By.xpath("//*[@type='submit']")).click();
 			wait(2);
 
+			// table validation
+			String tableXpath = "//h2[text()='Experience Credentials']/following-sibling::table[1]";
+			String tableRowXpath = tableXpath + "/tbody/tr";
+
+			List<WebElement> rows = driver.findElements(By.xpath(tableRowXpath));
+
+			boolean found = false;
+
+			for (WebElement row : rows) {
+
+				List<WebElement> cells = row.findElements(By.tagName("td"));
+
+				String actCompany = cells.get(0).getText();
+				String actJobtitle = cells.get(1).getText();
+				if (jobTitle.equals(actJobtitle) && company.equals(actCompany)) {
+					found = true;
+					break;
+				}
+
+			}
+
+			if (!found) {
+				throw new Exception("The newly enterd experience was not found");
+
+			}
+
 			System.out.println("Test Pass");
+
 		} catch (Exception e) {
 			System.out.println("Test Failed");
 			e.printStackTrace();
-			System.out.println("Reason" + e.getMessage());
+			System.out.println("Reason： " + e.getMessage());
 		} finally {
 			driver.close();
 			driver.quit();
@@ -62,5 +93,11 @@ public class Add_Experience {
 
 		Thread.sleep(second * 1000);
 
+	}
+
+	public static String getTimestamp() {
+//		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return timestamp.getTime() + "";
 	}
 }
