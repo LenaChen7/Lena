@@ -21,12 +21,12 @@ public class Add_Experience_Multi_Error {
 		String uRl = "https://boratech-practice-app.onrender.com/login#!";
 		// Data
 		String jobTitle = "";
-		String company = "";
-		String location = "fff";
-		String from = "03/10/2023";
+		String company = "hello";
+		String location = "lol";
+		String from = "07/01/1994";
 		String to = "07/21/2023";
 		boolean current = false;
-		String description = "teaching math to students";
+		String description = "";
 		List<String> expectedErrors = new ArrayList<>();
 		expectedErrors.add("Title is required");
 		expectedErrors.add("Company is required");
@@ -49,10 +49,11 @@ public class Add_Experience_Multi_Error {
 				driver.findElement(By.xpath("//input[@name='to']")).sendKeys(to);
 			}
 			driver.findElement(By.tagName("textarea")).sendKeys(description);
+			
 			Keywords.wait(5);
 			driver.findElement(By.xpath("//*[@type='submit']")).click();
 			// validation
-			Keywords.wait(2);
+			Keywords.wait(3);
 			List<WebElement> ErrorMessages = driver.findElements(By.xpath("//div[@class='alert alert-danger']"));
 			List<String> actualErrors = new ArrayList<>();
 			for (WebElement errorMessage : ErrorMessages) {
