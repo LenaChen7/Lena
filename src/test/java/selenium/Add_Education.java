@@ -32,11 +32,11 @@ public class Add_Education {
 			driver.get(uRl);
 			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(username);
 			driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password + Keys.ENTER);
-			wait(2);
+			Keywords.wait(2);
 
 			// Add education
 			driver.findElement(By.linkText("Add Education")).click();
-			wait(2);
+			Keywords.wait(2);
 
 			driver.findElement(By.xpath("//input[@name='school']")).sendKeys(school);
 			driver.findElement(By.xpath("//input[@name='degree']")).sendKeys(degree);
@@ -51,7 +51,7 @@ public class Add_Education {
 
 			driver.findElement(By.xpath("//textarea[@name='description']")).sendKeys(description);
 			driver.findElement(By.xpath("//*[@type='submit']")).click();
-			wait(2);
+			Keywords.wait(2);
 
 			// validation
 			boolean found = false;
@@ -90,12 +90,6 @@ public class Add_Education {
 			driver.close();
 			driver.quit();
 		}
-
-	}
-
-	public static void wait(int second) throws InterruptedException {
-
-		Thread.sleep(second * 1000);
 
 	}
 

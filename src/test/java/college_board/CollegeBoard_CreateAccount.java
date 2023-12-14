@@ -1,4 +1,4 @@
-package selenium;
+package college_board;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
