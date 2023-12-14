@@ -1,14 +1,13 @@
 package selenium;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import utility.Keywords;
 
 public class Add_Experience {
 
@@ -21,7 +20,7 @@ public class Add_Experience {
 		String uRl = "https://boratech-practice-app.onrender.com/login#!";
 		// Data
 		String jobTitle = "teacher";
-		String company = "RSM" + getTimestamp();
+		String company = "RSM" + Keywords.getTimestamp();
 		String location = "Ashburn";
 		String from = "03/10/2023";
 		String to = "07/21/2023";
@@ -32,10 +31,11 @@ public class Add_Experience {
 			driver.get(uRl);
 			driver.findElement(By.xpath("//input[@name='email']")).sendKeys(username);
 			driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password + Keys.ENTER);
-			wait(2);
+			Keywords.wait(2);
 
 			driver.findElement(By.xpath("//a[@href='/add-experience']")).click();
-			wait(2);
+			Keywords.wait(2);
+
 			driver.findElement(By.xpath("//input[@name='title']")).sendKeys(jobTitle);
 			driver.findElement(By.xpath("//input[@name='company']")).sendKeys(company);
 			driver.findElement(By.xpath("//input[@name='location']")).sendKeys(location);
@@ -48,7 +48,7 @@ public class Add_Experience {
 
 			driver.findElement(By.tagName("textarea")).sendKeys(description);
 			driver.findElement(By.xpath("//*[@type='submit']")).click();
-			wait(2);
+			Keywords.wait(2);
 
 			// table validation
 			String tableXpath = "//h2[text()='Experience Credentials']/following-sibling::table[1]";
@@ -89,15 +89,4 @@ public class Add_Experience {
 
 	}
 
-	public static void wait(int second) throws InterruptedException {
-
-		Thread.sleep(second * 1000);
-
-	}
-
-	public static String getTimestamp() {
-//		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		return timestamp.getTime() + "";
-	}
 }
