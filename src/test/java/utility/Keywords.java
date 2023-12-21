@@ -48,9 +48,7 @@ public class Keywords {
 		// console. In this case, it will print "2022-07-29".
 
 	}
-	
-	
-	
+
 	public static void wait(int second) throws InterruptedException {
 
 		Thread.sleep(second * 1000);
@@ -61,6 +59,35 @@ public class Keywords {
 //		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return timestamp.getTime() + "";
+	}
+
+	/**
+	 * check if the email is valid
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public static boolean containsLowercaseOrUppercase(String email) {
+		// Check for at least one lowercase letter
+		boolean hasLowercase = false;
+		// Check for at least one uppercase letter
+		boolean hasUppercase = false;
+
+		for (char c : email.toCharArray()) {
+			if (Character.isLowerCase(c)) {
+				hasLowercase = true;
+			} else if (Character.isUpperCase(c)) {
+				hasUppercase = true;
+			}
+
+			// If both conditions are true, no need to continue checking
+			if (hasLowercase && hasUppercase) {
+				return true;
+			}
+		}
+
+		// If either condition is true, the email is valid
+		return hasLowercase && hasUppercase;
 	}
 
 }
