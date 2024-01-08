@@ -11,8 +11,6 @@ public class Log_In {
 
 	public static void main(String[] args) {
 		WebDriver driver = new ChromeDriver();
-		String firstName = "Miya";
-		String lastName = "Chen";
 		String email = "chenlena@outlook.com";
 		String password = "798911Miya";
 
@@ -36,7 +34,7 @@ public class Log_In {
 			driver.findElement(By.xpath("//input[@id='ExistingAccount_EmailAddress']")).sendKeys(email);
 			driver.findElement(By.xpath("//input[@id='ExistingAccount_Password']")).sendKeys(password);
 			driver.findElement(By.xpath("//input[@type='submit'][@value='Log In']")).click();
-			
+
 			Keywords.wait(2);
 			// Validate if you are on the main page
 			String expectedUrl = "/account/login/";
@@ -76,29 +74,6 @@ public class Log_In {
 			driver.quit();
 		}
 
-	}
-
-	public static boolean containsLowercaseOrUppercase(String email) {
-		// Check for at least one lowercase letter
-		boolean hasLowercase = false;
-		// Check for at least one uppercase letter
-		boolean hasUppercase = false;
-
-		for (char c : email.toCharArray()) {
-			if (Character.isLowerCase(c)) {
-				hasLowercase = true;
-			} else if (Character.isUpperCase(c)) {
-				hasUppercase = true;
-			}
-
-			// If both conditions are true, no need to continue checking
-			if (hasLowercase && hasUppercase) {
-				return true;
-			}
-		}
-
-		// If either condition is true, the email is valid
-		return hasLowercase && hasUppercase;
 	}
 
 }
