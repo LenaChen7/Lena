@@ -89,5 +89,10 @@ public class Keywords {
 		// If either condition is true, the email is valid
 		return hasLowercase && hasUppercase;
 	}
+	
+	public static WebDriver driverFactory () {
+		WebDriver driver = new ChromeDriver();
+		return driver;
+	}
 
 }
