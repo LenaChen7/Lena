@@ -26,7 +26,6 @@ public class Costco_Dynamic_Wait {
 					By.xpath("//img[@alt='Apple Watch Series 9. A Gift from the heart. $90 OFF'][2]")));
 
 			audioDealsCard.click();
-
 			Keywords.doesElementExist(driver,
 					By.xpath("//h1[@automation-id='headerOutput'][contains(text(), 'Series 9 Apple Watch')]"),
 					"Failed to navigate to the apple watch page");
