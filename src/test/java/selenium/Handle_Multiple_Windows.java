@@ -1,8 +1,8 @@
 package selenium;
 
 import java.time.Duration;
-import java.util.Set;
 
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,6 @@ public class Handle_Multiple_Windows {
 		driver.manage().window().maximize();
 
 		try {
-
 			driver.get("https://www.google.com/m?client=ms-android-samsung-rvo1&source=android-home");
 			driver.findElement(By.name("q")).sendKeys("BoraTech" + Keys.ENTER);
 			// get the window handle for the current window
@@ -35,20 +34,19 @@ public class Handle_Multiple_Windows {
 			driver.navigate().to("https://www.walmart.com/");
 			driver.findElement(By.xpath("//input[@type = 'search']")).sendKeys("Shampoo" + Keys.ENTER);
 
-			String newHandle = driver.getWindowHandle();
-			System.out.println("New Handle: " + newHandle);
-
 			Set<String> handles = driver.getWindowHandles();
 			System.out.println("All Handles: " + handles);
-
-			// To switch between windows
-			driver.switchTo().window(mainHandle);
-			driver.close();
-			Keywords.wait(3);
+			
+			// To switch between windows, with window handle
 			// Selenium doesn't automatically switch to other windows
-			driver.switchTo().window(newHandle);
-			driver.close();
-			Keywords.wait(3);
+
+			for (String handle : handles) {
+				if (!handle.equals(mainHandle)) {
+					driver.switchTo().window(handle);
+				}
+			}
+			
+		
 
 			System.out.println("Test Pass");
 

@@ -9,7 +9,7 @@ public class CollegeBoard_CreateAccount {
 	public static void main(String[] args) {
 		WebDriver driver = new ChromeDriver();
 		driver.get(
-				"https://cbaccount.collegeboard.org/iamweb/smartRegister?appId=292&DURL=https%3A%2F%2Fwww.collegeboard.org%2F");
+				"https://www.collegeboard.org/");
 		try {
 			driver.findElement(By.id("firstNameField")).sendKeys("Lena");
 			Thread.sleep(2000);

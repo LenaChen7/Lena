@@ -3,6 +3,8 @@ package utility;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class Keywords {
 
 	WebDriver driver = new ChromeDriver();
+
+	public static void doesElementExist(WebDriver driver, By locator, String errorMessage) throws Exception {
+		boolean found = doesElementExist(driver, locator);
+
+		if (!found) {
+			throw new Exception(errorMessage);
+		}
+
+	}
 
 	public static boolean doesElementExist(WebDriver driver, By locator) {
 
@@ -24,6 +35,7 @@ public class Keywords {
 
 	}
 
+	
 	public static boolean doesElementExist2(WebDriver driver, By locator) {
 
 		return driver.findElements(locator).size() > 0;
@@ -89,10 +101,23 @@ public class Keywords {
 		// If either condition is true, the email is valid
 		return hasLowercase && hasUppercase;
 	}
-	
-	public static WebDriver driverFactory () {
+
+	public static WebDriver driverFactory() {
 		WebDriver driver = new ChromeDriver();
 		return driver;
+	}
+
+//Switch to a new window
+	public static void switchToTheNewTab(WebDriver driver) {
+		Set<String> handles = driver.getWindowHandles();
+		String mainHandle = driver.getWindowHandle();
+
+		for (String handle : handles) {
+			if (!handle.equals(mainHandle)) {
+				driver.switchTo().window(handle);
+			}
+
+		}
 	}
 
 }
