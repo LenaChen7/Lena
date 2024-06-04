@@ -1,5 +1,7 @@
 package Data_Collection;
+
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -24,6 +26,7 @@ public class amazon_data_collection {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		driver.manage().window().maximize();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		List<Amazon_Search_Result_Pojo> results = new ArrayList<>();
 
 		String searchTerm = "shampoo";
 
@@ -45,17 +48,23 @@ public class amazon_data_collection {
 				for (int i = 1; i <= cards.size(); i++) {
 					String titleXpath = parentXpath + "[" + i + "]//h2";
 					String priceXpath = parentXpath + "[" + i + "]//span[@class = 'a-price']";
-					String price = null;
-
+					String priceString = null;
 					String title = driver.findElement(By.xpath(titleXpath)).getText();
+
 					try {
-						price = driver.findElement(By.xpath(priceXpath)).getText();
-						price = price.replace("\n", ".");
+						priceString = driver.findElement(By.xpath(priceXpath)).getText();
+						priceString = priceString.replace("\n", ".").replace("$", "");
 					} catch (NoSuchElementException e) {
 						continue;
 					}
 
-					System.out.println("ID: " + ++counter + " Price: " + price + " Title: " + title);
+//					System.out.println(++counter + title + priceString);
+//					// use pojo as date collection
+					Amazon_Search_Result_Pojo result = new Amazon_Search_Result_Pojo(++counter,
+							Double.valueOf(priceString), title);
+
+					results.add(result);
+
 					if (counter == 200) {
 						break;
 					}
@@ -78,6 +87,10 @@ public class amazon_data_collection {
 			driver.close();
 			driver.quit();
 		}
+		for (Amazon_Search_Result_Pojo result : results) {
+			System.out.println("id: " + result.id + " Price: " + result.price + " Title: " + result.title);
+		}
+
 	}
 
 }
