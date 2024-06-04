@@ -1,5 +1,6 @@
 package Data_Collection;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import utility.Keywords;
 
 public class amazon_data_collection {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// Search for an item
 		// Collect the title, price for each result item
 		// Write the result into an excel file
@@ -31,6 +32,7 @@ public class amazon_data_collection {
 		String searchTerm = "shampoo";
 
 		try {
+
 			driver.get("https://www.amazon.com/");
 			driver.findElement(By.cssSelector("#twotabsearchtextbox")).sendKeys(searchTerm + Keys.ENTER);
 			// to check if the element exist
@@ -87,10 +89,7 @@ public class amazon_data_collection {
 			driver.close();
 			driver.quit();
 		}
-		for (Amazon_Search_Result_Pojo result : results) {
-			System.out.println("id: " + result.id + " Price: " + result.price + " Title: " + result.title);
-		}
-
+		Excel.exportAmazonSearchResults(searchTerm, results);
 	}
 
 }
